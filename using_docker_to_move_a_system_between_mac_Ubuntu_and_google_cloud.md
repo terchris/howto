@@ -8,7 +8,7 @@ This howto includes 3 hosts
 - localubuntu -- Ubuntu running in VirtualBox on my Mac
 - urbalurbahost -- A VM instance running in Google Compute Engine
 
-### About discourse.org
+#### About discourse.org
 discourse.org is the best discussion system you can get. It is open source and if you plan to create a community then this is what to get. If you, like me, just want the discussion functionality and not the pain of setting up servers. Then running discourse in a docker container is the best thing.  This is described here: 
 discourse_docker https://github.com/discourse/discourse_docker
 
@@ -18,9 +18,7 @@ Local development on my Mac
 
 I normally use docker on my mac and wanted to build the discourse_docker container on my mac. I found out that that was not possible because of some errors in the launcher script.
 This lead to having to install Ubuntu and getting containers moved between different hosts.
-- Mac 
-- localubuntu - Ubuntu running under VirtualBox on my Mac
-- urbalurbahost - A VN running on Google Compute Engine
+
 
 ## Ubuntu in VirtualBox on my Mac
 Solution to this was to set up VirtualBox and install Ubuntu on it (named it localubuntu).
