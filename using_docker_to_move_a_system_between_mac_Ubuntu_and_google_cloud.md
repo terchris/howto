@@ -32,7 +32,7 @@ Used this to install https://cloud.google.com/sdk/docs/quickstart-linux on local
 ### Pushing discourse_docker container to google cloud from localubuntu 
 Get our project ID
 ```
---> export PROJECT_ID="$(gcloud config get-value project -q)"
+PROJECT_ID="$(gcloud config get-value project -q)"
 ```
 List the images
 ```
@@ -40,12 +40,14 @@ docker images
 ```
 
 Tag the discourse image “urbalurba-discourse:v1”
--->  docker image tag local_discourse/app:latest gcr.io/${PROJECT_ID}/urbalurba-discourse:v1
-
+```
+docker image tag local_discourse/app:latest gcr.io/${PROJECT_ID}/urbalurba-discourse:v1
+```
 
 Push it to the google docker registry
---> gcloud docker -- push gcr.io/${PROJECT_ID}/urbalurba-discourse:v1
-
+```
+gcloud docker -- push gcr.io/${PROJECT_ID}/urbalurba-discourse:v1
+```
 The container is HUGE so be patient.
 
 ## Getting the container back to my Mac
@@ -58,7 +60,9 @@ https://cloud.google.com/sdk/docs/quickstart-mac-os-x
  
 ### Pulling discourse_docker container from google cloud to my Mac
 Pull the image to the mac
---> gcloud docker -- pull gcr.io/urbalurba-184319/urbalurba-discourse:v1
+```
+gcloud docker -- pull gcr.io/urbalurba-184319/urbalurba-discourse:v1
+```
 (I had login problems first, so make sure you are logged in with the same user as you pushed the container)
 
 ### Copy data files from localubuntu to Mac host
@@ -68,19 +72,26 @@ Created the dir  /Users/tec/dockerdisk/urbalurba-discourse/shared
 Created the dir /Users/tec/dockerdisk/vmdisk
 
 On localubuntu go to the dir that has the datafiles
---> cd /var/discourse/shared
+```
+cd /var/discourse/shared
+```
  tar the directory
---> sudo tar -cvf standalone_dir.tar standalone
-
+ ```
+sudo tar -cvf standalone_dir.tar standalone
+```
 On the Mac host i have a temp dir. Go there
---> cd dockerdisk/vmdisk
+```
+cd dockerdisk/vmdisk
+```
 Copy the files from localubuntu
---> scp your_username@172.16.1.186:/var/discourse/shared/standalone_dir.tar .
+```
+scp your_username@172.16.1.186:/var/discourse/shared/standalone_dir.tar .
+```
 (ip is the address of the localubuntu. Make sure u have set up network to bridge in VirtualBox)
 
 In Mac finder click on the standalone_dir.tar file to extract 
 Copy the extracted dir to 
---> /Users/tec/dockerdisk/urbalurba-discourse/shared 
+ /Users/tec/dockerdisk/urbalurba-discourse/shared 
 
 
 ### Run the container on the Mac
@@ -94,13 +105,14 @@ And the volumes
 
 I have removed passwords and stuff. Then the docker command looks like this
 
-
+```
 docker run -d --restart=always -e LANG=en_US.UTF-8 -e RAILS_ENV=production -e UNICORN_WORKERS=2 -e UNICORN_SIDEKIQS=1 -e RUBY_GLOBAL_METHOD_CACHE_SIZE=131072 -e RUBY_GC_HEAP_GROWTH_MAX_SLOTS=40000 -e RUBY_GC_HEAP_INIT_SLOTS=400000 -e RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR=1.5 -e DISCOURSE_DB_SOCKET=/var/run/postgresql -e DISCOURSE_DB_HOST= -e DISCOURSE_DB_PORT= -e DISCOURSE_HOSTNAME=discourse.urbalurba.no -e DISCOURSE_DEVELOPER_EMAILS=notme@urbalurba.no -e DISCOURSE_SMTP_ADDRESS=smtp.elasticemail.com -e DISCOURSE_SMTP_PORT=2525 -e DISCOURSE_SMTP_USER_NAME=notme@urbalurba.no -e DISCOURSE_SMTP_PASSWORD=I-will-not-give-you-this_:) -h urbadics -e DOCKER_HOST_IP=docker.for.mac.localhost --name urbalurbadiscourse -t -p 80:80 -p 443:443 -v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone:/shared -v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone/log/var-log:/var/log gcr.io/urbalurba-184319/urbalurba-discourse:v1 /sbin/boot
-
+```
 
 The container should now start and you can check that it is running by 
---> docker ps
-
+```
+docker ps
+```
 Now open http://localhost on your mac in a browser of your choice
 
 
@@ -116,10 +128,12 @@ I have a instance (a VM in google compute engine) that is set up using this howt
 ### Create a instance on Google compute engine
 
 List available VMs
---> ./gcloud compute images list \
+```
+gcloud compute images list \
 >     --project cos-cloud \
 >     --no-standard-images
-
+```
+You get something like this:
 NAME                      PROJECT    FAMILY      DEPRECATED  STATUS
 cos-beta-62-9901-50-0     cos-cloud  cos-beta                READY
 cos-dev-63-10032-4-0      cos-cloud  cos-dev                 READY
@@ -127,24 +141,29 @@ cos-stable-60-9592-100-0  cos-cloud                          READY
 cos-stable-61-9765-79-0   cos-cloud  cos-stable              READY
 
 Create VM named urbalurbahost
---> ./gcloud compute instances create urbalurbahost \
+```
+gcloud compute instances create urbalurbahost \
     --image cos-stable-61-9765-79-0 \
     --image-project cos-cloud \
     --zone us-central1-a \
     --machine-type n1-standard-1
-
+```
 
 #### Log in to urbalurbahost from the mac
---> gcloud compute --project "urbalurba-184319" ssh --zone "us-central1-a" "urbalurbahost"
-
+```
+gcloud compute --project "urbalurba-184319" ssh --zone "us-central1-a" "urbalurbahost"
+```
 #### Configure the urbalurbahost instance 
---> docker-credential-gcr configure-docker
+```
+docker-credential-gcr configure-docker
+```
 ERR: It seems it does not authenticate.Do this instead
 
--->  METADATA=http://metadata.google.internal/computeMetadata/v1
--->  SVC_ACCT=$METADATA/instance/service-accounts/default
---> ACCESS_TOKEN=$(curl -H 'Metadata-Flavor: Google' $SVC_ACCT/token   | cut -d'"' -f 4)
-
+```
+METADATA=http://metadata.google.internal/computeMetadata/v1
+SVC_ACCT=$METADATA/instance/service-accounts/default
+ACCESS_TOKEN=$(curl -H 'Metadata-Flavor: Google' $SVC_ACCT/token   | cut -d'"' -f 4)
+```
 Output is then:
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -152,15 +171,18 @@ Output is then:
 
 
 #### Login to the google docker registry
--->  docker login -u _token -p $ACCESS_TOKEN https://gcr.io
+```
+docker login -u _token -p $ACCESS_TOKEN https://gcr.io
+```
 Login Succeeded
 
 
 OK. So now we have a VM in google compute engine named urbalurbahost and docker knows about and ca log in to google docker registry where we pushed our container.
 
 ### Pull the urbalurba-discourse image to urbalurbahost
---> docker pull gcr.io/urbalurba-184319/urbalurba-discourse:v1
-
+```
+docker pull gcr.io/urbalurba-184319/urbalurba-discourse:v1
+```
 
 ### Prepare urbalurbahost host data disk
 Create the dir /home/tec/dockerdisk/urbalurba-discourse/shared
@@ -171,16 +193,20 @@ Create the dir /home/tec/dockerdisk/vmdisk
 ### Copy data files from Mac to urbalurbahost
 
 On the Mac host i have a temp dir. Go there
---> cd dockerdisk/vmdisk
+```
+cd dockerdisk/vmdisk
+```
 Copy the files on the Mac that was created on localubuntu to urbalurbahost
---> gcloud compute scp standalone_dir.tar urbalurbahost:/home/tec/dockerdisk/vmdisk/standalone_dir.tar
-
+``` 
+gcloud compute scp standalone_dir.tar urbalurbahost:/home/tec/dockerdisk/vmdisk/standalone_dir.tar
+```
 Copy and extract the files so that they are ready
---> cp standalone_dir.tar  /home/tec/dockerdisk/urbalurba-discourse/shared
---> cd /home/tec/dockerdisk/urbalurba-discourse/shared
---> tar -xvf standalone_dir.tar
---> rm standalone_dir.tar
-
+```
+cp standalone_dir.tar  /home/tec/dockerdisk/urbalurba-discourse/shared
+cd /home/tec/dockerdisk/urbalurba-discourse/shared
+tar -xvf standalone_dir.tar
+rm standalone_dir.tar
+```
 Yeyy. Now we have the container and the data.
 
 
@@ -202,9 +228,9 @@ And the volumes
 
 And I have removed passwords and stuff. Then the docker command looks like this
 
-
+```
 docker run -d --restart=always -e LANG=en_US.UTF-8 -e RAILS_ENV=production -e UNICORN_WORKERS=2 -e UNICORN_SIDEKIQS=1 -e RUBY_GLOBAL_METHOD_CACHE_SIZE=131072 -e RUBY_GC_HEAP_GROWTH_MAX_SLOTS=40000 -e RUBY_GC_HEAP_INIT_SLOTS=400000 -e RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR=1.5 -e DISCOURSE_DB_SOCKET=/var/run/postgresql -e DISCOURSE_DB_HOST= -e DISCOURSE_DB_PORT= -e DISCOURSE_HOSTNAME=discourse.urbalurba.no -e DISCOURSE_DEVELOPER_EMAILS=notme@urbalurba.no -e DISCOURSE_SMTP_ADDRESS=smtp.elasticemail.com -e DISCOURSE_SMTP_PORT=2525 -e DISCOURSE_SMTP_USER_NAME=notme@urbalurba.no -e DISCOURSE_SMTP_PASSWORD=I-will-not-give-you-this_:)  -h urbadics -e DOCKER_HOST_IP=172.17.0.1 --name urbalurbadiscourse3 -t -p 80:80 -p 443:443 -v /home/tec/dockerdisk/urbalurba-discourse/shared/standalone:/shared -v /home/tec/dockerdisk/urbalurba-discourse/shared/standalone/log/var-log:/var/log gcr.io/urbalurba-184319/urbalurba-discourse:v1 /sbin/boot
-
+```
 
 Now open a local browser http:// <see external ip address on firewall config above>
 
