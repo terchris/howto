@@ -10,8 +10,12 @@ discourse_docker https://github.com/discourse/discourse_docker
 
 BUT. there are some tweaks to it. And this is how to solve them. 
 
-# Local development in Mac
+Local development in Mac
 I normally use docker on my mac and wanted to build the discourse_docker container on my mac. I found out that that was not possible because of some errors in the launcher script.
+This lead to having to install Ubuntu and getting containers moved between different hosts.
+- Mac 
+- localubuntu - Ubuntu running under VirtualBox on my Mac
+- urbalurbahost - A VN running on Google Compute Engine
 
 ## Ubuntu in VirtualBox on my Mac
 Solution to this was to set up VirtualBox and install Ubuntu on it (named it localubuntu).
