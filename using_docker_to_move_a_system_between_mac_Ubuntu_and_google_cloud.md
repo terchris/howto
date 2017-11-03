@@ -1,4 +1,8 @@
+This howto describes how to get a docker container moved between Ubuntu Linux, Mac and Google cloud. It demonstrates the beauty of how docker makes it possible to move a complex system between several platforms.  
+You can use the howto on any other docker image.  So even if you are not installing discourse you can use it.
+
 I wanted to set up discourse.org on a VM hosted at Google compute engine. It was not trivial and I want to share the journey so that you can save time.
+
 
 ### About discourse.org
 discourse.org is the best discussion system you can get. It is open source and if you plan to create a community then this is what to get. If you, like me, just want the discussion functionality and not the pain of setting up servers. Then running discourse in a docker container is the best thing.  This is described here: 
