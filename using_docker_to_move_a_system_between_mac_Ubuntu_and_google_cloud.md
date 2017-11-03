@@ -9,7 +9,7 @@ This howto includes 3 hosts
 - urbalurbahost -- A VM instance running in Google Compute Engine
 
 #### About discourse.org
-discourse.org is the best discussion system you can get. It is open source and if you plan to create a community then this is what to get. If you, like me, just want the discussion functionality and not the pain of setting up servers. Then running discourse in a docker container is the best thing.  This is described here: 
+[discourse.org](http://discourse.org)is the best discussion system you can get. It is open source and if you plan to create a community then this is what to get. If you, like me, just want the discussion functionality and not the pain of setting up servers. Then running discourse in a docker container is the best thing.  This is described here: 
 discourse_docker https://github.com/discourse/discourse_docker
 
 BUT. there are some tweaks to it. And this is how to solve them. 
@@ -21,8 +21,8 @@ This lead to having to install Ubuntu and getting containers moved between diffe
 
 
 ## Ubuntu in VirtualBox on my Mac
-Solution to this was to set up VirtualBox and install Ubuntu on it (named it localubuntu).
-This worked just fine and I was able to build and run discourse_docker container inside my ubuntu under VirtualBox.
+Solution to this was to set up [VirtualBox](http://VirtualBox.org) and install [Ubuntu](https://www.ubuntu.com/download/server) on it (named it localubuntu).
+This worked just fine and I was able to build and run discourse_docker container inside my ubuntu under VirtualBox. (Use Bridged network adapter so that localubuntu has a IP address on your network)
 
 ### Google cloud SDK on Ubuntu
 In order to get discourse_docker to google cloud I needed to push it to google docker registry. For this I needed to install google cloud SDK on localubuntu. 
