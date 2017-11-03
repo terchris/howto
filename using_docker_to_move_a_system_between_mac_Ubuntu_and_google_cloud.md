@@ -99,6 +99,7 @@ Now that we have the container on the mac it’s time to run it. I copy the dock
 
 * DOCKER_HOST_IP=docker.for.mac.localhost 
 * The image name : gcr.io/urbalurba-184319/urbalurba-discourse:v1
+
 And the volumes 
 * -v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone:/shared 
 * -v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone/log/var-log:/var/log 
@@ -129,8 +130,8 @@ I have a instance (a VM in google compute engine) that is set up using this howt
 List available VMs
 ```
 gcloud compute images list \
->     --project cos-cloud \
->     --no-standard-images
+     --project cos-cloud \
+     --no-standard-images
 ```
 You get something like this:
 NAME                      PROJECT    FAMILY      DEPRECATED  STATUS
