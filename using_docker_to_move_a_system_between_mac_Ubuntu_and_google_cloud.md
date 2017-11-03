@@ -166,6 +166,7 @@ SVC_ACCT=$METADATA/instance/service-accounts/default
 ACCESS_TOKEN=$(curl -H 'Metadata-Flavor: Google' $SVC_ACCT/token   | cut -d'"' -f 4)
 ```
 Output is then:
+
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   208  100   208    0     0  69868      0 --:--:-- --:--:-- --:--:--  101k
@@ -234,7 +235,7 @@ And I have removed passwords and stuff. Then the docker command looks like this
 > docker run -d --restart=always -e LANG=en_US.UTF-8 -e RAILS_ENV=production -e UNICORN_WORKERS=2 -e UNICORN_SIDEKIQS=1 -e RUBY_GLOBAL_METHOD_CACHE_SIZE=131072 -e RUBY_GC_HEAP_GROWTH_MAX_SLOTS=40000 -e RUBY_GC_HEAP_INIT_SLOTS=400000 -e RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR=1.5 -e DISCOURSE_DB_SOCKET=/var/run/postgresql -e DISCOURSE_DB_HOST= -e DISCOURSE_DB_PORT= -e DISCOURSE_HOSTNAME=discourse.urbalurba.no -e DISCOURSE_DEVELOPER_EMAILS=notme@urbalurba.no -e DISCOURSE_SMTP_ADDRESS=smtp.elasticemail.com -e DISCOURSE_SMTP_PORT=2525 -e DISCOURSE_SMTP_USER_NAME=notme@urbalurba.no -e DISCOURSE_SMTP_PASSWORD=I-will-not-give-you-this_:)  -h urbadics -e DOCKER_HOST_IP=172.17.0.1 --name urbalurbadiscourse3 -t -p 80:80 -p 443:443 -v /home/tec/dockerdisk/urbalurba-discourse/shared/standalone:/shared -v /home/tec/dockerdisk/urbalurba-discourse/shared/standalone/log/var-log:/var/log gcr.io/urbalurba-184319/urbalurba-discourse:v1 /sbin/boot
 
 
-Now open a local browser http:// <see external ip address on firewall config above>
+Now open a local browser http:// *see external ip address on firewall config above*
 
 
 # Errors that needs to be solved
@@ -244,13 +245,16 @@ The container is accessing the volumes specified and I see logs for nginx at
 
 This is where I need help from the community - Do you know why it does not work?
 
+```
+sudo cat /home/tec/dockerdisk/urbalurba-discourse/shared/standalone/log/var-log/nginx/access.log
+```
 
---> sudo cat /home/tec/dockerdisk/urbalurba-discourse/shared/standalone/log/var-log/nginx/access.log
-output:
 [03/Nov/2017:05:52:17 +0000] "104.198.186.228" 85.165.238.194 "GET / HTTP/1.1" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/604.3.5 (KHTML, like Gecko) Version/11.0.1 Safari/604.3.5" "-" 502 316 "-" 0.000 0.000 "-"
 
---> sudo cat /home/tec/dockerdisk/urbalurba-discourse/shared/standalone/log/var-log/nginx/error.log
-output:
+```
+sudo cat /home/tec/dockerdisk/urbalurba-discourse/shared/standalone/log/var-log/nginx/error.log
+```
+
 2017/11/03 05:52:17 [error] 52#52: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 85.165.238.194, server: _, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:3000/", host: "104.198.186.228"
 
 
@@ -266,7 +270,9 @@ On the Mac the access.log is like this
 
 
  
-So trying to get just the image file from urbalurbahost. That works and the log is :
+Trying to get just the image file from urbalurbahost. http:// *see external ip address on firewall config above*/images/d-logo-sketch.png
+That works and the log is :
+
 [03/Nov/2017:06:28:29 +0000] "104.198.186.228" 85.165.238.194 "GET /images/d-logo-sketch.png HTTP/1.1" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/604.3.5 (KHTML, like Gecko) Version/11.0.1 Safari/604.3.5" "-" 200 14672 "-" - 0.000 "-"
 
 
