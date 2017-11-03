@@ -31,10 +31,13 @@ Used this to install https://cloud.google.com/sdk/docs/quickstart-linux on local
 
 ### Pushing discourse_docker container to google cloud from localubuntu 
 Get our project ID
+```
 --> export PROJECT_ID="$(gcloud config get-value project -q)"
-
+```
 List the images
---> docker images
+```
+docker images
+```
 
 Tag the discourse image “urbalurba-discourse:v1”
 -->  docker image tag local_discourse/app:latest gcr.io/${PROJECT_ID}/urbalurba-discourse:v1
