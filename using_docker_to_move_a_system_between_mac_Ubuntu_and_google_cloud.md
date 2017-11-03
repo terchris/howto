@@ -135,11 +135,11 @@ gcloud compute images list \
 ```
 You get something like this:
 
-> NAME                      PROJECT    FAMILY      DEPRECATED  STATUS
-> cos-beta-62-9901-50-0     cos-cloud  cos-beta                READY
-> cos-dev-63-10032-4-0      cos-cloud  cos-dev                 READY
-> cos-stable-60-9592-100-0  cos-cloud                          READY
-> cos-stable-61-9765-79-0   cos-cloud  cos-stable              READY
+- NAME |                     PROJECT |   FAMILY |     DEPRECATED | STATUS
+cos-beta-62-9901-50-0  |   cos-cloud | cos-beta |            |   READY
+cos-dev-63-10032-4-0   |   cos-cloud | cos-dev  |            |   READY
+cos-stable-60-9592-100-0 | cos-cloud |          |            |   READY
+cos-stable-61-9765-79-0 |  cos-cloud | cos-stable |           |  READY
 
 Create VM named urbalurbahost
 ```
