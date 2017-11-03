@@ -1,4 +1,4 @@
-![Picture](http://https://avatars0.githubusercontent.com/u/1422998?s=460&v=4)
+![Picture](http://www.maintech.no/fileshare/filarkivroot/Nyheter%20bilder/2017/SmarteByerNorge_logo_640x528.jpg)
 
 This howto describes how to get a docker container moved between Ubuntu Linux, Mac and Google cloud. It demonstrates the beauty of how docker makes it possible to move a complex system between several platforms.  
 You can use the howto on any other docker image.  So even if you are not installing discourse you can use it.
