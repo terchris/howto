@@ -1,4 +1,4 @@
-#Moving a docker image between Ubuntu, Mac and Google Compute Engine
+# Moving a docker image between Ubuntu, Mac and Google Compute Engine
 
 ![Picture](http://urbalurba.no/dataset/46568ec0-d676-4a2a-a039-4479abf96fba/resource/07f26a58-fc7d-4532-9865-8c11d1ba4f3f/download/dockermoving.png)
 
