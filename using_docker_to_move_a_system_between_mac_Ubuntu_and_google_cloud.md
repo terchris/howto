@@ -2,7 +2,7 @@
 
 ![Picture](http://urbalurba.no/dataset/46568ec0-d676-4a2a-a039-4479abf96fba/resource/07f26a58-fc7d-4532-9865-8c11d1ba4f3f/download/dockermoving.png) 
 
-This howto describes how to move a docker container between Ubuntu Linux, Mac and Google cloud. It demonstrates the beauty of how docker makes it possible to move complex system between several platforms.  
+This howto describes how to move a docker container between Ubuntu Linux, Mac and Google cloud. It demonstrates the beauty of how docker makes it possible to move complex system between platforms.  
 You can use the howto on any other docker image.  Even if you are not installing discourse you can use it.
 
 I wanted to set up discourse.org on a VM hosted at Google compute engine. It was not trivial and I want to share the journey so that you can save time.
