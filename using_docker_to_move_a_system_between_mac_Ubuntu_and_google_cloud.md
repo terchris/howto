@@ -9,7 +9,7 @@ This howto includes 3 hosts
 - urbalurbahost -- A VM instance running in Google Compute Engine
 
 #### About discourse.org
-[discourse.org](http://discourse.org)is the best discussion system you can get. It is open source and if you plan to create a community then this is what to get. If you, like me, just want the discussion functionality and not the pain of setting up servers. Then running discourse in a docker container is the best thing.  This is described here: 
+[discourse.org](http://discourse.org) isthe best discussion system you can get. It is open source and if you plan to create a community then this is what to get. If you, like me, just want the discussion functionality and not the pain of setting up servers. Then running discourse in a docker container is the best thing.  This is described here: 
 discourse_docker https://github.com/discourse/discourse_docker
 
 BUT. there are some tweaks to it. And this is how to solve them. 
@@ -34,7 +34,7 @@ Get our project ID
 ```
 PROJECT_ID="$(gcloud config get-value project -q)"
 ```
-List the images
+List the images on localubuntu
 ```
 docker images
 ```
@@ -63,13 +63,13 @@ Pull the image to the mac
 ```
 gcloud docker -- pull gcr.io/urbalurba-184319/urbalurba-discourse:v1
 ```
-(I had login problems first, so make sure you are logged in with the same user as you pushed the container)
+(I had login problems first, so make sure you are logged in with the same user as on localubuntu)
 
 ### Copy data files from localubuntu to Mac host
 
 Prepare Mac host data disk
-Created the dir  /Users/tec/dockerdisk/urbalurba-discourse/shared
-Created the dir /Users/tec/dockerdisk/vmdisk
+* Created the dir  /Users/tec/dockerdisk/urbalurba-discourse/shared
+* Created the dir /Users/tec/dockerdisk/vmdisk
 
 On localubuntu go to the dir that has the datafiles
 ```
@@ -89,9 +89,9 @@ scp your_username@172.16.1.186:/var/discourse/shared/standalone_dir.tar .
 ```
 (ip is the address of the localubuntu. Make sure u have set up network to bridge in VirtualBox)
 
-In Mac finder click on the standalone_dir.tar file to extract 
-Copy the extracted dir to 
- /Users/tec/dockerdisk/urbalurba-discourse/shared 
+In Mac finder click on the standalone_dir.tar file to extract it. 
+Copy the extracted dir to the prepared directory
+* /Users/tec/dockerdisk/urbalurba-discourse/shared 
 
 
 ### Run the container on the Mac
