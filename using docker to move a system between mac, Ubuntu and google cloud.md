@@ -1,6 +1,6 @@
 I wanted to set up discourse.org on a VM hosted at Google compute engine. It was not trivial and I want to share the journey so that you can save time.
 
-About discourse.org
+#About discourse.org
 discourse.org is the best discussion system you can get. It is open source and if you plan to create a community then this is what to get. If you, like me, just want the discussion functionality and not the pain of setting up servers. Then running discourse in a docker container is the best thing.  This is described here: 
 discourse_docker https://github.com/discourse/discourse_docker
 
@@ -8,14 +8,16 @@ BUT. there are some tweaks to it. And this is how to solve them.
 
 I normally use docker on my mac and wanted to build the discourse_docker container on my mac. I found out that that was not possible because of some errors in the launcher script.
 
+##Ubuntu in VirtualBox on my Mac
 Solution to this was to set up VirtualBox and install Ubuntu on it (named it localubuntu).
 This worked just fine and I was able to build and run discourse_docker container inside my ubuntu under VirtualBox.
 
+#google cloud SDK on Ubuntu
 In order to get discourse_docker to google cloud I needed to push it to google docker registry. For this I needed to install google cloud SDK on localubuntu. 
 Used this to install https://cloud.google.com/sdk/docs/quickstart-linux on localubuntu.
 (worked fine, but install script did not update path to gcloud so I had to do it manually)
 
-Pushing discourse_docker to google cloud 
+#Pushing discourse_docker container to google cloud 
 Get our project ID
 --> export PROJECT_ID="$(gcloud config get-value project -q)"
 
