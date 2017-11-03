@@ -135,11 +135,11 @@ gcloud compute images list \
 ```
 You get something like this:
 
-NAME |                     PROJECT |   FAMILY |     DEPRECATED | STATUS
-cos-beta-62-9901-50-0  |   cos-cloud | cos-beta |            |   READY
-cos-dev-63-10032-4-0   |   cos-cloud | cos-dev  |            |   READY
-cos-stable-60-9592-100-0 | cos-cloud |          |            |   READY
-cos-stable-61-9765-79-0 |  cos-cloud | cos-stable |           |  READY
+NAME - PROJECT - FAMILY - DEPRECATED - STATUS
+cos-beta-62-9901-50-0 | cos-cloud | cos-beta | | READY
+cos-dev-63-10032-4-0 | cos-cloud | cos-dev | | READY
+cos-stable-60-9592-100-0 | cos-cloud | |  | READY
+cos-stable-61-9765-79-0 | cos-cloud | cos-stable | | READY
 
 Create VM named urbalurbahost
 ```
@@ -165,11 +165,6 @@ METADATA=http://metadata.google.internal/computeMetadata/v1
 SVC_ACCT=$METADATA/instance/service-accounts/default
 ACCESS_TOKEN=$(curl -H 'Metadata-Flavor: Google' $SVC_ACCT/token   | cut -d'"' -f 4)
 ```
-Output is then:
-
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100   208  100   208    0     0  69868      0 --:--:-- --:--:-- --:--:--  101k
 
 
 #### Login to the google docker registry
