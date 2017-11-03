@@ -97,11 +97,11 @@ Copy the extracted dir to the prepared directory
 ### Run the container on the Mac
 Now that we have the container on the mac it’s time to run it. I copy the docker run with all its parameters from localubuntu. I need to change the following parameters.
 
-DOCKER_HOST_IP=docker.for.mac.localhost 
-The image name : gcr.io/urbalurba-184319/urbalurba-discourse:v1
+> DOCKER_HOST_IP=docker.for.mac.localhost 
+> The image name : gcr.io/urbalurba-184319/urbalurba-discourse:v1
 And the volumes 
--v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone:/shared 
--v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone/log/var-log:/var/log 
+> -v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone:/shared 
+> -v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone/log/var-log:/var/log 
 
 I have removed passwords and stuff. Then the docker command looks like this
 
