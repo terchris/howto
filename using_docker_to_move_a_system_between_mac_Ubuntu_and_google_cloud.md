@@ -8,7 +8,7 @@ This howto includes 3 hosts
 - localubuntu -- Ubuntu running in VirtualBox on my Mac
 - urbalurbahost -- A VM instance running in Google Compute Engine
 
-<!-- toc -->
+<hr>
 
 #### About discourse.org
 [discourse.org](http://discourse.org) isthe best discussion system you can get. It is open source and if you plan to create a community then this is what to get. If you, like me, just want the discussion functionality and not the pain of setting up servers. Then running discourse in a docker container is the best thing.  This is described here: 
