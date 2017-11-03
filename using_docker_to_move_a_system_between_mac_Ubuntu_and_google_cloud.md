@@ -97,17 +97,16 @@ Copy the extracted dir to the prepared directory
 ### Run the container on the Mac
 Now that we have the container on the mac it’s time to run it. I copy the docker run with all its parameters from localubuntu. I need to change the following parameters.
 
-> DOCKER_HOST_IP=docker.for.mac.localhost 
-> The image name : gcr.io/urbalurba-184319/urbalurba-discourse:v1
+* DOCKER_HOST_IP=docker.for.mac.localhost 
+* The image name : gcr.io/urbalurba-184319/urbalurba-discourse:v1
 And the volumes 
-> -v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone:/shared 
-> -v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone/log/var-log:/var/log 
+* -v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone:/shared 
+* -v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone/log/var-log:/var/log 
 
 I have removed passwords and stuff. Then the docker command looks like this
 
-```
-docker run -d --restart=always -e LANG=en_US.UTF-8 -e RAILS_ENV=production -e UNICORN_WORKERS=2 -e UNICORN_SIDEKIQS=1 -e RUBY_GLOBAL_METHOD_CACHE_SIZE=131072 -e RUBY_GC_HEAP_GROWTH_MAX_SLOTS=40000 -e RUBY_GC_HEAP_INIT_SLOTS=400000 -e RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR=1.5 -e DISCOURSE_DB_SOCKET=/var/run/postgresql -e DISCOURSE_DB_HOST= -e DISCOURSE_DB_PORT= -e DISCOURSE_HOSTNAME=discourse.urbalurba.no -e DISCOURSE_DEVELOPER_EMAILS=notme@urbalurba.no -e DISCOURSE_SMTP_ADDRESS=smtp.elasticemail.com -e DISCOURSE_SMTP_PORT=2525 -e DISCOURSE_SMTP_USER_NAME=notme@urbalurba.no -e DISCOURSE_SMTP_PASSWORD=I-will-not-give-you-this_:) -h urbadics -e DOCKER_HOST_IP=docker.for.mac.localhost --name urbalurbadiscourse -t -p 80:80 -p 443:443 -v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone:/shared -v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone/log/var-log:/var/log gcr.io/urbalurba-184319/urbalurba-discourse:v1 /sbin/boot
-```
+> docker run -d --restart=always -e LANG=en_US.UTF-8 -e RAILS_ENV=production -e UNICORN_WORKERS=2 -e UNICORN_SIDEKIQS=1 -e RUBY_GLOBAL_METHOD_CACHE_SIZE=131072 -e RUBY_GC_HEAP_GROWTH_MAX_SLOTS=40000 -e RUBY_GC_HEAP_INIT_SLOTS=400000 -e RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR=1.5 -e DISCOURSE_DB_SOCKET=/var/run/postgresql -e DISCOURSE_DB_HOST= -e DISCOURSE_DB_PORT= -e DISCOURSE_HOSTNAME=discourse.urbalurba.no -e DISCOURSE_DEVELOPER_EMAILS=notme@urbalurba.no -e DISCOURSE_SMTP_ADDRESS=smtp.elasticemail.com -e DISCOURSE_SMTP_PORT=2525 -e DISCOURSE_SMTP_USER_NAME=notme@urbalurba.no -e DISCOURSE_SMTP_PASSWORD=I-will-not-give-you-this_:) -h urbadics -e DOCKER_HOST_IP=docker.for.mac.localhost --name urbalurbadiscourse -t -p 80:80 -p 443:443 -v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone:/shared -v /Users/tec/dockerdisk/urbalurba-discourse/shared/standalone/log/var-log:/var/log gcr.io/urbalurba-184319/urbalurba-discourse:v1 /sbin/boot
+
 
 The container should now start and you can check that it is running by 
 ```
