@@ -1,6 +1,5 @@
 # Monitoring what is going on inside your CKAN installation
 
-![Picture](http://urbalurba.no/dataset/46568ec0-d676-4a2a-a039-4479abf96fba/resource/07f26a58-fc7d-4532-9865-8c11d1ba4f3f/download/dockermoving.png) 
 
 Maybe you, like me, have the unpleasant experience of been hacked. 
 Seeing traffic going in and out from your site should be a happy feeling and not a reason to worry about if you are hacked. The cloud providers default tools just tells you that there is bytes going in and out,  that CPU is low or high, that disk write and read is going on.
