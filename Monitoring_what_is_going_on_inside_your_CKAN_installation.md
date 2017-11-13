@@ -1,25 +1,33 @@
-CKAN.org relies on several systems. These systems are:
+# figuring out what is going on 
 
-Postgresql - The database where all data is stored
-Redis - 
-Solr -
-Apache -
-Nginx - 
-Ubuntu -
-
-This howto describes how you set up monitoring for these systems. If you, like me, don’t care what these systems do and just want them do what they are supposed to. Then this howto is for you.
+![Picture](http://urbalurba.no/dataset/46568ec0-d676-4a2a-a039-4479abf96fba/resource/07f26a58-fc7d-4532-9865-8c11d1ba4f3f/download/dockermoving.png) 
 
 If you, like me, have the unpleasant experience of been hacked. 
 Seeing traffic going in and out from your site should be a happy feeling and not a reason to worry about if you are hacked. The cloud providers default tools just tells you that there is bytes going in and out,  that CPU is low or high, that disk write and read is going on.
 
 But what is really happening. Is it all good or all bad ?
 
+
+CKAN.org relies on several systems. These systems are:
+
+Postgresql - The database where all data is stored
+- Redis - 
+- Solr -
+- Apache -
+- Nginx - 
+- Ubuntu -
+
+This howto describes how you set up monitoring for these systems. If you, like me, don’t care what these systems do and just want them do what they are supposed to. Then this howto is for you.
+
+<hr>
+
+
 To know something about this you need to look inside the box. And you need to have some historic metering that can tell you if this is normal or not.
 
 If you, like me, also want all this for free. Well, then this howto is definitely for you. 
 
 
-Datadog
+## Datadog
 
 Datadog is a monitoring & analytics tool that lives in the cloud. You install an agent on your server and the agent reports what is going on to https://www.datadoghq.com/
 
@@ -32,7 +40,7 @@ The screenshot shows the different systems that is used by CKAN.
 Datadog has a free tier. It allows you to  monitor up to 5 machines and it just have 1 day history on the metrics monitored in your server. But you get a good view of what is going on inside the box.
 
 
-Installing datadog
+## Installing datadog
 
 Installing the datadog agent
 The agent is the component that collects information about the systems on your server and sends information to datadoghq.
@@ -63,21 +71,21 @@ Looking at the metrics in datadoghq
 <how to display CPU, disk, network >
 
 
-Creating the CKAN dashboard
+## Creating the CKAN dashboard
 Install all the monitoring components as described. Then come back here to create the dashboard that tells you what is going on inside your CKAN system.
 
 
 <screenshots > 
 
 
-Installing monitoring for the systems CKAN use
+## Installing monitoring for the systems CKAN use
 On a plane install all of these are running on the same host. 
 The ckan config file (/etc/ckan/default/production.ini) has the following two lines
 solr_url = http://127.0.0.1:8983/solr
 ckan.redis.url = redis://localhost:6379/0
 
 
-Installing datadog for redis
+### Installing datadog for redis
 create the redis config file /etc/dd-agent/conf.d/redisdb.yaml and put the following lines
 init_config:
 
@@ -109,7 +117,7 @@ Search for redis and click install. You will see a tab. Click on the “Configur
 The redis tile will move up from the Available integrations to the Installed integrations
 
 
-Installing datadog for solr
+### Installing datadog for solr
 
 Go to the datadog directory
 cd /etc/dd-agent/conf.d
@@ -148,7 +156,7 @@ Search for solr and click install. You will see a tab. Click on the “Configura
 The solr tile will move up from the Available integrations to the Installed integrations
 
 
-Installing datadog for postgres
+### Installing datadog for postgres
 
 Open the integration page in datadoghq
 Open https://app.datadoghq.com/account/settings
@@ -237,7 +245,7 @@ The PostgreSQL tile will move up from the Available integrations to the Installe
 
 
 
-Installing datadog for apache
+### Installing datadog for apache
 
 Check the version of apache 
 apache2 -v
@@ -283,7 +291,7 @@ Search for Apache and click install. You will see a tab. Click on the “Configu
 The Apache tile will move up from the Available integrations to the Installed integrations
 
 
- Installing datadog for nginx
+### Installing datadog for nginx
 
  Check your version 
  nginx -v
